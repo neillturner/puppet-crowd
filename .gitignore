@@ -1,4 +1,7 @@
+.bundle
+.bundler
 .tmp
 .idea
 .swp
 Gemfile.lock
+spec/fixtures

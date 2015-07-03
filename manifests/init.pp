@@ -3,8 +3,6 @@
 #
 # This module is used to install Crowd.
 #
-# This module requires mkrakowitzer-deploy and maestrodev-wget
-#
 # Format modeled on from @brycejohnson & @mkrakowitzer 's / puppet-jira module
 #
 # === Parameters
@@ -56,13 +54,19 @@ class crowd (
   $idjdbcversion     = $crowd::params::idjdbcversion,
 
   # Misc Settings
-  $downloadURL       = $crowd::params::downloadURL,
+  $download_url      = $crowd::params::download_url,
+  $service_provider  = $crowd::params::service_provider,
+  $service_enable    = $crowd::params::service_enable,
+  $java_home         = $crowd::params::java_home,
+  $jvm_xms           = $crowd::params::jvm_xms,
+  $jvm_xmx           = $crowd::params::jvm_xmx,
+  $jvm_opts          = $crowd::params::jvm_opts,
 
 ) inherits crowd::params {
 
-  $webappdir    = "${installdir}/atlassian-${product}-${version}-standalone"
-  $dburl        = "jdbc:${db}://${dbserver}:${dbport}/${dbname}"
-  $iddburl      = "jdbc:${iddb}://${iddbserver}:${iddbport}/${iddbname}"
+  $webappdir = "${installdir}/atlassian-${product}-${version}-standalone"
+  $dburl     = "jdbc:${db}://${dbserver}:${dbport}/${dbname}"
+  $iddburl   = "jdbc:${iddb}://${iddbserver}:${iddbport}/${iddbname}"
 
   include crowd::install
   include crowd::config

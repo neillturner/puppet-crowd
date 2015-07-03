@@ -1,0 +1,37 @@
+{
+  "name": "joshbeard-crowd",
+  "version": "0.1.8",
+  "author": "joshbeard",
+  "summary": "Atlassian Crowd Puppet Module",
+  "license": "Apache-2.0",
+  "source": "https://github.com/joshbeard/puppet-crowd",
+  "project_page": "https://github.com/joshbeard/puppet-crowd",
+  "issues_url": "https://github.com/joshbeard/puppet-crowd/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    },
+    {
+      "name": "nanliu-staging",
+      "version_requirement": ">= 1.0.3"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    }
+  ]
+}

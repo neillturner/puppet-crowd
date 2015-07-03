@@ -1,0 +1,68 @@
+#!/bin/sh
+#
+# Crowd startup script
+#
+# chkconfig:   2345 80 05
+#
+# description: Atlassian Crowd
+
+### BEGIN INIT INFO
+# Provides: crowd
+# Required-Start: $remote_fs $syslog
+# Required-Stop: $remote_fs $syslog
+# Default-Start: 2345
+# Default-Stop: 016
+# Short-Description: Start and stop the Atlassian Crowd service
+# Description: Provides the crowd authentication service
+### END INIT INFO
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+RUN_AS_USER="<%= scope.lookupvar('crowd::user') %>"
+CATALINA_HOME="<%= scope.lookupvar('crowd::webappdir') %>/apache-tomcat"
+exec="${CATALINA_HOME}/bin/startup.sh"
+pidfile="${CATALINA_HOME}/work/crowd.pid"
+
+crowd_start() {
+  [ -x $exec ] || exit 5
+  echo -n $"Starting crowd: "
+  daemon --user "${RUN_AS_USER}" "${exec}"
+  retval=$?
+  echo
+  return $retval
+}
+
+crowd_stop() {
+  echo -n $"Stopping crowd: "
+  killproc -p $pidfile
+  retval=$?
+  echo
+  return $retval
+}
+
+crowd_status() {
+  status -p $pidfile crowd
+  retval=$?
+  echo
+  return $retval
+}
+
+case "$1" in
+  start)
+    crowd_start
+    ;;
+  stop)
+    crowd_stop
+    ;;
+  status)
+    crowd_status
+    ;;
+  restart)
+    crowd_stop
+    sleep 10
+    crowd_start
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|status|restart}"
+esac
